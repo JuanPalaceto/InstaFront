@@ -369,7 +369,7 @@ main {
   }
   .aside .sugerencias div {
     display: flex;
-    padding-top: rem;
+    padding-top: 1rem;
   }
   .aside .sugerencias a {
     color: #000;
