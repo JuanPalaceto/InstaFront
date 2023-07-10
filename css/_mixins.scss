@@ -1,4 +1,4 @@
-@mixin imagen-redonda ($tamano: 70px) {
+@mixin imagen-redonda ($tamano: 50px) {
     border-radius: 50%;
     vertical-align: middle;
     width: $tamano;
@@ -10,4 +10,16 @@
     grid-template-rows: $filas;
     grid-column-gap: $column-gap;
     grid-row-gap: $row-gap;
+}
+
+@mixin boton-link () {
+    background-color: transparent;
+    border: none;
+    color: #1CA0F6;
+    margin-left: auto;
+    transition: color 0.3s ease-in-out;
+    cursor: pointer;
+    &:hover {
+        color: #2b7eb6;
+    }
 }

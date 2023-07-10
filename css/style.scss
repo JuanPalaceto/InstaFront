@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500;700&display=swap');
 @import "variables";
 @import "mixins";
 
@@ -11,9 +12,13 @@ body {
     padding: 0;
 }
 
-.header {
+header {
+    background-color: #fff;
     border-bottom: 2px solid $border-color;
-    padding: 0.5rem 1rem;
+}
+
+.header {
+    padding: 0.25rem 0.625rem;
     & nav {
         @include grid-template(repeat(2, 1fr));
     }
@@ -27,7 +32,7 @@ body {
     }
     & h2 {
         display: inline-block;
-        font-size: 2rem;
+        font-size: 1.5rem;
         font-weight: 400;
     }
 }
@@ -44,30 +49,46 @@ body {
     }
 }
 
+main {
+    @include grid-template(1fr auto, auto 1fr, 8rem);
+    grid-template-areas:
+    "stories stories"
+    "publicaciones publicaciones";
+    padding-bottom: 7rem;
+}
+
 .historias {
-    padding: 2rem 2rem 1rem;
+    grid-area: stories;
+    overflow-x: scroll;
+    padding: 1.5rem 1.5rem 0.75rem;
     & div {
-        @include grid-template(repeat(4, 1fr), 1fr, 25px);
+        @include grid-template(repeat(4, 1fr), 1fr, 20px);
+        background-color: #fff;
         border: 1px solid $border-color;
-        border-radius: 8px;
+        border-radius: 5px;
         overflow-x: scroll;
-        padding: 1.5rem 2.5rem;
+        padding: 1.25rem 2rem;
     }
     & a {
         justify-self: center;
+        &:nth-child(n + 5) {
+            display: none;
+        }
     }
     & img {
-        @include imagen-redonda(80px);
+        @include imagen-redonda(60px);
     }
 }
 
 .publicaciones {
-    padding: 1rem 2rem;
+    grid-area: publicaciones;
+    padding: 0.75rem 1.5rem;
 }
 
 .publicacion {
+    background-color: #fff;
     border: 1px solid $border-color;
-    border-radius: 8px;
+    border-radius: 5px;
 }
 
 .publicacion-header {
@@ -83,10 +104,10 @@ body {
     }
     & p {
         display: inline-block;
-        font-size: 1.2rem;
+        font-family: "Inter";
+        font-size: 1rem;
         font-weight: 500;
-        letter-spacing: 0.5px;
-        margin-left: 10px;
+        margin-left: 5px;
     }
     & img {
         @include imagen-redonda();
@@ -105,7 +126,7 @@ body {
 }
 
 .publicacion-body {
-    padding: 1.5rem;
+    padding: 1rem;
     & .foto-publicacion {
         padding-bottom: 0;
         & img {
@@ -116,7 +137,7 @@ body {
         display: inline-block;
         & div {
             &:first-child {
-                padding: 0.5rem 0;
+                padding: 0.5rem 0 0.125rem ;
                 width: fit-content;
                 @include grid-template(repeat(4, auto), 1fr, 5vw);
                 & button {
@@ -125,6 +146,206 @@ body {
                     cursor: pointer;
                     padding: 0;
                 }
+            }
+            & span {
+                font-family: "Inter";
+                font-size: 0.825rem;
+            }
+        }
+    }
+
+    & .publicacion-comentarios {
+        & button {
+            border: none;
+            background-color: transparent;
+            color: rgba(164, 155, 155, 1);
+            cursor: pointer;
+            padding: 0.75rem 0;
+            transition: color 0.3s ease-in-out;
+            &:hover {
+                color: rgb(122, 121, 121);
+            }
+        }
+        & p {
+            font-size: 0.825rem;
+            margin: 0;
+            padding-bottom: 0.75rem;
+            & span {
+                font-weight: 700;
+                margin-right: 0.25rem;
+            }
+        }
+
+    }
+}
+
+.aside {
+    background-color: #fff;
+    display: none;
+}
+
+.footer {
+    @include grid-template(1fr);
+    background-color: #000;
+    & div {
+        justify-self: center;
+        padding: 0.5rem 0;
+        text-align: center;
+    }
+    & span {
+        color: #fff;
+        font-size: 0.825rem;
+        font-weight: 300 ;
+    }
+}
+
+@media screen and (min-width:1024px) {
+    body {
+        background-color: $bg-color;
+    }
+
+    .header {
+        margin: 0 auto;
+        max-width: 1240px;
+        padding: 0.25rem 0;
+        & nav {
+            @include grid-template(repeat(3, 1fr));
+        }
+    }
+
+    .logo {
+        padding-left: 6.75rem;
+    }
+
+    .buscador {
+        align-self: center;
+        display: grid;
+        height: 40px;
+        & input {
+            background-color: $bg-color;
+            border: 1px solid $border-color;
+            border-radius: 5px;
+            &::placeholder {
+                color: #000;
+                padding-left: 0.5rem;
+            }
+            &:focus {
+                padding-left: 0.5rem;
+                outline: 2px solid rgb(172, 172, 172);
+                &::placeholder {
+                    padding-left: 0;
+                }
+            }
+        }
+    }
+
+    .foto-perfil {
+        padding-right: 2rem;
+    }
+
+    main {
+        grid-template-areas:
+        "stories aside"
+        "publicaciones aside";
+        margin: 0 auto;
+        max-width: 1024px;
+    }
+
+    .historias {
+        overflow-x: auto;
+        padding: 3rem 0 1.5rem;
+        & div {
+            @include grid-template(repeat(7, 1fr), 1fr, 20px);
+            overflow-x: auto;
+        }
+        & a {
+            &:nth-child(n + 5) {
+                display: block;
+            }
+        }
+    }
+
+    .publicaciones {
+        grid-area: publicaciones;
+        padding: 1.5rem 0;
+    }
+
+    .publicacion-body {
+        padding: 2rem 4rem;
+        & .publicacion-acciones {
+            & div {
+                &:first-child {
+                    @include grid-template(repeat(4, auto), 1fr, 25px);
+                }
+            }
+        }
+    }
+
+    .aside {
+        background-color: transparent;
+        display: grid;
+        grid-area: aside;
+        height: fit-content;
+        padding: 3rem 0;
+        width: 280px;
+        & .perfil {
+            display: flex;
+            padding: 1.25rem 0;
+            & a {
+                color: #000;
+                display: inline-block;
+            }
+            & img {
+                @include imagen-redonda();
+            }
+            & div {
+                display: inline-block;
+                margin-left: 10px;
+                vertical-align: bottom;
+                & p {
+                    font-size: 0.825rem;
+                    font-weight: 700;
+                    line-height: 0.725rem;
+                    margin: 0;
+                }
+                & span {
+                    color: #808080;
+                    font-size: 0.825rem;
+                    line-height: 0.725rem;
+                }
+            }
+            & button {
+                @include boton-link();
+            }
+        }
+        & .sugerencias {
+            padding-top: 1rem;
+            & div {
+                display: flex;
+                padding-top:  rem;
+            }
+            & a {
+                color: #000;
+                text-decoration: none;
+            }
+            & span {
+                &:first-child {
+                    color: #808080;
+                    font-size: 0.82 5rem;
+                    font-weight: 700;
+                }
+            }
+            & img {
+                @include imagen-redonda(30px);
+            }
+            & p {
+                display: inline-block;
+                font-size: 0.825rem;
+                font-weight: 700;
+                margin: 0;
+            }
+            & button {
+                @include boton-link();
             }
         }
     }
